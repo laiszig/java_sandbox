@@ -39,7 +39,11 @@ class Main2 {
 //        Collections.sort(bookList, (Book book1, Book book2) -> book1.getYear().compareTo(book2.getYear()));
         Collections.sort(bookList, Comparator.comparing(Book::getYear));
         bookList.forEach(book -> System.out.println(book.getYear()));
-
-
     }
 }
+
+/* :: Method Reference Expressions
+A method reference expression is used to refer to the invocation of a method without actually performing the invocation.
+Certain forms of method reference expression also allow class instance creation or array creation
+to be treated as if it were a method invocation
+ */
