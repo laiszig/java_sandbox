@@ -1,3 +1,5 @@
+package cat;
+
 public class Cat implements Printable {
 
     public String name;

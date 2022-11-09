@@ -1,7 +1,9 @@
+package cat;
+
 public class Main {
     public static void main(String[] args) {
 
-        Cat myCat = new Cat();
+//        Cat myCat = new Cat();
 
         printThing(() -> System.out.println("Meow!"));
     }
