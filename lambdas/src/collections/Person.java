@@ -41,6 +41,7 @@ class Main {
         System.out.println("------------------");
         System.out.println("Sort people by age");
         Collections.sort(listPeople, new Comparator<Person>() {
+
             @Override
             public int compare(Person person1, Person person2) {
                 return person1.getAge().compareTo(person2.getAge());
