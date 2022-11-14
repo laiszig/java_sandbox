@@ -1,3 +1,5 @@
+package ExampleOne;
+
 public class Main {
 
     static class Dependency {
