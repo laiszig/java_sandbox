@@ -1,13 +1,13 @@
-package ExampleTwo;
+package ExampleTwo.tighlyCoupled;
 
 import java.math.BigDecimal;
 
-public class Product {
+public class Product_t {
 
     private String name;
     private BigDecimal valorTotal;
 
-    public Product(String name, BigDecimal valorTotal) {
+    public Product_t(String name, BigDecimal valorTotal) {
         this.name = name;
         this.valorTotal = valorTotal;
     }
