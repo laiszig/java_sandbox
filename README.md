@@ -12,7 +12,7 @@ Java Documentation - https://docs.oracle.com/en/java/
 
 ## Topics covered so far
 * dependency injection
-* lambda
+* lambdas
 * java classes/objects
 
 ### Steps to run applications
