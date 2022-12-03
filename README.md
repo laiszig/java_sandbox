@@ -23,5 +23,5 @@ Open project with your IDE
 
 Make any necessary changes -> Save
 
-Right click on the application Run as -> Spring Boot
+Right click on the application Run
 ```
