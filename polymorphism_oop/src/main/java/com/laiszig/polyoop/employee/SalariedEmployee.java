@@ -1,4 +1,6 @@
-public class SalariedEmployee extends Employee implements Payable {
+package com.laiszig.polyoop.employee;
+
+public class SalariedEmployee extends Employee {
 
     private double salary;
     private final double discount;
@@ -35,7 +37,5 @@ public class SalariedEmployee extends Employee implements Payable {
         double x = this.discount * this.salary / 100;
         return this.salary - x;
     }
-
-
 
 }

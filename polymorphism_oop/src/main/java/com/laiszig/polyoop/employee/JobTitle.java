@@ -1,3 +1,5 @@
+package com.laiszig.polyoop.employee;
+
 public enum JobTitle {
 
     // Enum for job titles, guaranteeing no job titles not on this class is accepted

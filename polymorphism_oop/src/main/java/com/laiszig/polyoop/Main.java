@@ -1,3 +1,10 @@
+package com.laiszig.polyoop;
+
+import com.laiszig.polyoop.employee.Employee;
+import com.laiszig.polyoop.employee.HourlyEmployee;
+import com.laiszig.polyoop.employee.JobTitle;
+import com.laiszig.polyoop.employee.SalariedEmployee;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -10,7 +17,7 @@ public class Main {
         employee2.setName("Mary Williams");
         employee2.setJobTitle(JobTitle.SOFTWARE_DEVELOPER);
 
-        Employee employee = new Employee();
+        Employee employee = new SalariedEmployee(5300);
         employee.setName("Jim Peterson");
         employee.setJobTitle(JobTitle.MANAGER);
 

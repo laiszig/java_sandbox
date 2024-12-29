@@ -1,5 +1,7 @@
-// Subclass of Employee
-public class HourlyEmployee extends Employee implements Payable {
+package com.laiszig.polyoop.employee;
+
+// Subclass of payable.Employee
+public class HourlyEmployee extends Employee{
 
     private final double rate;
     private final double hoursWorked;

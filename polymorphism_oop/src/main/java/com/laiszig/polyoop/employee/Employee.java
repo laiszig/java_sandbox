@@ -1,5 +1,7 @@
+package com.laiszig.polyoop.employee;
+
 // Base class
-public class Employee {
+public abstract class Employee implements Payable {
 
     private String name;
     private JobTitle jobTitle;
