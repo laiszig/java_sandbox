@@ -12,8 +12,14 @@ Java Documentation - https://docs.oracle.com/en/java/
 
 ## Topics covered so far
 * dependency injection
-* lambdas
 * java classes/objects
+* OOP
+    * inheritance
+    * polymorphism
+ * functional programming
+    * streams
+    * lambda
+    * functional interfaces
 
 ### Steps to run applications
 ```
