@@ -1,0 +1,19 @@
+package Exercise_2;
+
+/*
+2. Write a Java program to implement a lambda expression to check if a given string is empty.
+ */
+
+interface StringCheck {
+
+    boolean isStringEmpty(String string);
+}
+
+class Test {
+
+    public static void main(String[] args) {
+
+        StringCheck stringCheck = 
+
+    }
+}
