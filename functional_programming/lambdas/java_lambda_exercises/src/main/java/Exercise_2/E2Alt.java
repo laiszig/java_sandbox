@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 class Main {
     public static void main(String[] args) {
         // Lambda expression to check if a given string is empty
-        Predicate isEmptyString = str -> str.isEmpty();
+        Predicate isEmptyString = str -> str.toString().isEmpty();
 
         // Test cases
         String str1 = ""; // empty string
