@@ -1,7 +1,7 @@
 import candidate.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -96,16 +96,31 @@ public class Main {
                 false, 135000
         );
 
+        CandidateFilter candidateFilter = new CandidateFilter();
         Candidate[] candidates = {candidate1, candidate2, candidate3, candidate4, candidate5,
                 candidate6, candidate7, candidate8, candidate9, candidate10};
 
-        CandidateFilter candidateFilter = new CandidateFilter();
-
         List<Candidate> shortListOfCandidates = Arrays.stream(candidates).filter(candidateFilter.composed).toList();
 
-        System.out.println("Short-list of candidates: ");
+        System.out.println("Part 1 - Short-list of candidates: ");
         for (Candidate c : shortListOfCandidates){
             System.out.println(c.getName());
+        }
+
+        Map<String, Object> criteria = new HashMap<>();
+        criteria.put("yearsOfExperience", 10);
+        criteria.put("hasMobileExperience", true);
+        criteria.put("level", "Senior");
+        criteria.put("frameworks", List.of(Frameworks.ANGULAR));
+        criteria.put("englishLevel", EnglishLevel.FLUENT);
+
+        List<Predicate<Candidate>> preds = CandidateFilter.setRequirements(criteria);
+
+        List<Candidate> newShortList = CandidateFilter.filterCandidates(Arrays.stream(candidates).toList(), preds);
+
+        System.out.println("Part 2 - Short-list of candidates: ");
+        for (Candidate candidate : newShortList){
+            System.out.println(candidate.getName());
         }
 
     }

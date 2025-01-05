@@ -47,10 +47,6 @@ public class Candidate {
         return level;
     }
 
-    public List<ProgrammingLanguages> getProgrammingLanguages() {
-        return programmingLanguages;
-    }
-
     public List<DataBases> getDbs() {
         return dbs;
     }
@@ -59,19 +55,8 @@ public class Candidate {
         return englishLevel;
     }
 
-    public StudyLevel getStudyLevel() {
-        return studyLevel;
-    }
-
-    public List<Frameworks> getFrameworks() {
-        return frameworks;
-    }
-
     public boolean hasMobileExperience() {
         return mobileExperience;
     }
 
-    public double getSalaryExpectation() {
-        return salaryExpectation;
-    }
 }
