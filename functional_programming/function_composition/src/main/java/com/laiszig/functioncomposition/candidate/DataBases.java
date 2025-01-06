@@ -1,4 +1,4 @@
-package candidate;
+package com.laiszig.functioncomposition.candidate;
 
 public enum DataBases {
 

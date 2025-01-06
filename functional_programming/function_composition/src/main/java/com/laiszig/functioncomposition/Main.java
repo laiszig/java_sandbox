@@ -1,4 +1,6 @@
-import candidate.*;
+package com.laiszig.functioncomposition;
+
+import com.laiszig.functioncomposition.candidate.*;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -88,12 +90,12 @@ public class Main {
         );
 
         Candidate candidate10 = new Candidate(
-                "Jack Taylor", 9, "Senior",
+                "Jack Taylor", 12, "Senior",
                 Arrays.asList(ProgrammingLanguages.JAVA, ProgrammingLanguages.C, ProgrammingLanguages.JAVASCRIPT),
                 Arrays.asList(DataBases.ORACLE, DataBases.MYSQL),
                 EnglishLevel.FLUENT, StudyLevel.MASTER,
                 Arrays.asList(Frameworks.SPRING, Frameworks.ANGULAR),
-                false, 135000
+                true, 135000
         );
 
         CandidateFilter candidateFilter = new CandidateFilter();
@@ -113,8 +115,9 @@ public class Main {
         criteria.put("level", "Senior");
         criteria.put("frameworks", List.of(Frameworks.ANGULAR));
         criteria.put("englishLevel", EnglishLevel.FLUENT);
+        criteria.put("dbs", List.of(DataBases.ORACLE));
 
-        List<Predicate<Candidate>> preds = CandidateFilter.setRequirements(criteria);
+        List<Predicate<Candidate>> preds = CandidateFilter.createPredicates(criteria);
 
         List<Candidate> newShortList = CandidateFilter.filterCandidates(Arrays.stream(candidates).toList(), preds);
 
