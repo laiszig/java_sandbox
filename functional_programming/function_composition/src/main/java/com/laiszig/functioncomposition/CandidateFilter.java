@@ -1,10 +1,8 @@
 package com.laiszig.functioncomposition;
 
 import com.laiszig.functioncomposition.candidate.*;
-import com.laiszig.functioncomposition.model.CandidateCriteria;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -48,33 +46,25 @@ public class CandidateFilter {
     public static List<Predicate<Candidate>> createPredicates(Map<String, Object> criteria) {
         // Avoid using variables outside map so that it doesn't change the state of anything outside its scope
          return criteria.entrySet().stream()
-                .map(entry -> {
-            switch (entry.getKey()) {
-                case "yearsOfExperience":
-                    return (Predicate<Candidate>) c -> c.getYearsOfExperience() >= (Integer) entry.getValue();
-                case "mobileExperience":
-                    return (Predicate<Candidate>) Candidate::hasMobileExperience;
-                case "level":
-                    return (Predicate<Candidate>) c -> c.getLevel().equals(entry.getValue());
-                case "englishLevel":
-                    return (Predicate<Candidate>) c -> c.getEnglishLevel().equals(entry.getValue());
+                .map(entry -> switch (entry.getKey()) {
+                    case "yearsOfExperience" ->
+                            (Predicate<Candidate>) c -> c.getYearsOfExperience() >= (Integer) entry.getValue();
+                    case "mobileExperience" -> (Predicate<Candidate>) Candidate::hasMobileExperience;
+                    case "level" -> (Predicate<Candidate>) c -> c.getLevel().equals(entry.getValue());
+                    case "englishLevel" -> (Predicate<Candidate>) c -> c.getEnglishLevel().equals(entry.getValue());
                     // For cases such as list, we add a stream that checks if value is an instance of List contains the value
-                case "frameworks":
-                    return (Predicate<Candidate>) c ->
+                    case "frameworks" -> (Predicate<Candidate>) c ->
                             entry.getValue() instanceof List<?> &&
                                     ((List<Frameworks>) entry.getValue())
                                             .stream()
                                             .anyMatch(c.getFrameworks()::contains);
-                case "dbs":
-                    return (Predicate<Candidate>) c ->
+                    case "dbs" -> (Predicate<Candidate>) c ->
                             entry.getValue() instanceof List<?> &&
                                     ((List<DataBases>) entry.getValue())
                                             .stream()
                                             .anyMatch(c.getDbs()::contains);
-                default:
-                    return null;
-            }
-        }).filter(Objects::nonNull)
+                    default -> null;
+                }).filter(Objects::nonNull)
                  .collect(toList());
     }
 
