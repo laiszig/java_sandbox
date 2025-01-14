@@ -2,12 +2,9 @@ package com.laiszig.file_processor.reader;
 
 import com.laiszig.file_processor.FileProcessorApplication;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.io.*;
+import java.net.URL;
+import java.util.*;
 
 public class FileReader {
 
@@ -56,5 +53,30 @@ public class FileReader {
             System.out.println(entry.getKey() + " number of occurrences: " + entry.getValue());
         }
     }
+
+    public List<String> getResourceFiles(String path) throws IOException {
+        List<String> filenames = new ArrayList<>();
+
+        try (
+                InputStream in = getResourceAsStream(path);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+            String resource;
+
+            while ((resource = br.readLine()) != null) {
+                filenames.add(resource);
+            }
+        }
+        System.out.println(filenames);
+        return filenames;
+    }
+
+    private InputStream getResourceAsStream(String resource) {
+        ClassLoader classLoader = FileProcessorApplication.class.getClassLoader();
+        final InputStream in
+                = classLoader.getResourceAsStream(resource);
+
+        return in == null ? getClass().getResourceAsStream(resource) : in;
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.laiszig.file_processor;
 import com.laiszig.file_processor.reader.FileReader;
 import com.laiszig.file_processor.threadpool.ThreadPool;
 
+import java.io.File;
 import java.io.IOException;
 
 public class FileProcessorApplication {
@@ -11,18 +12,24 @@ public class FileProcessorApplication {
 
 //        FileReader.readFile("random_words_1.txt");
 
-        ThreadPool threadPool = new ThreadPool(3, 10);
+//        ThreadPool threadPool = new ThreadPool(3, 5);
+//
+//        for (int i = 0; i < 10; i++) {
+//            int taskNo = i;
+//            threadPool.execute(() -> {
+//                try {
+//                    FileReader.readFile("random_words_1.txt");
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            });
+//        }
+//        threadPool.waitUntilAllTasksFinished();
+//        threadPool.stop();
 
-        for (int i = 0; i < 10; i++) {
-            int taskNo = i;
-            threadPool.execute(() -> {
-                String message =
-                        Thread.currentThread().getName()
-                            + ": Task " + taskNo;
-                System.out.println(message);
-            });
+        FileReader fileReader = new FileReader();
+        for(String s : fileReader.getResourceFiles("txt")) {
+            System.out.println(s);
         }
-        threadPool.waitUntilAllTasksFinished();
-        threadPool.stop();
     }
 }
