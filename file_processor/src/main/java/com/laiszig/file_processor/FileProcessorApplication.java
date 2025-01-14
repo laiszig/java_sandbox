@@ -5,12 +5,12 @@ import com.laiszig.file_processor.threadpool.ThreadPool;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileProcessorApplication {
 
     public static void main(String[] args) throws Exception {
-
-//        FileReader.readFile("random_words_1.txt");
 
 //        ThreadPool threadPool = new ThreadPool(3, 5);
 //
@@ -30,8 +30,10 @@ public class FileProcessorApplication {
         FileReader fileReader = new FileReader();
         for(String s : fileReader.getResourceFiles("txt")) {
             System.out.println("******** Reading file: " + s + " ********");
-            System.out.println("*****************************************");
-            FileReader.readFile(s);
+            System.out.println("**************************************************");
+            String fileString = fileReader.readFile(s);
+            Map<String, Integer> occurrencesMap = fileReader.countWordOccurrence(fileString);
+            fileReader.printOccurrences(occurrencesMap);
         }
     }
 }
