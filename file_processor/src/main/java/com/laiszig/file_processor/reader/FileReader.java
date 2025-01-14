@@ -3,7 +3,6 @@ package com.laiszig.file_processor.reader;
 import com.laiszig.file_processor.FileProcessorApplication;
 
 import java.io.*;
-import java.net.URL;
 import java.util.*;
 
 public class FileReader {
@@ -11,7 +10,7 @@ public class FileReader {
     public static void readFile(String path) throws IOException {
         ClassLoader classLoader = FileProcessorApplication.class.getClassLoader();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                Objects.requireNonNull(classLoader.getResourceAsStream(path))))) {
+                Objects.requireNonNull(classLoader.getResourceAsStream("txt/" + path))))) {
             try {
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
@@ -35,7 +34,7 @@ public class FileReader {
         HashMap<String, Integer> map = new HashMap<>();
 
         for (String word : a) {
-            if(word.isEmpty()) {
+            if(word.isBlank()) {
                 continue;
             }
             if(map.containsKey(word)) {
@@ -66,7 +65,6 @@ public class FileReader {
                 filenames.add(resource);
             }
         }
-        System.out.println(filenames);
         return filenames;
     }
 

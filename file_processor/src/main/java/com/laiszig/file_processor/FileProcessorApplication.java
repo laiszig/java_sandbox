@@ -29,7 +29,9 @@ public class FileProcessorApplication {
 
         FileReader fileReader = new FileReader();
         for(String s : fileReader.getResourceFiles("txt")) {
-            System.out.println(s);
+            System.out.println("******** Reading file: " + s + " ********");
+            System.out.println("*****************************************");
+            FileReader.readFile(s);
         }
     }
 }
