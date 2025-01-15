@@ -79,5 +79,4 @@ public class FileReader {
         return in == null ? getClass().getResourceAsStream(resource) : in;
     }
 
-
 }
