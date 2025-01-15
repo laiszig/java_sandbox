@@ -11,15 +11,16 @@ The intent of this repository is to create all kinds of Java code using as many 
 Java Documentation - https://docs.oracle.com/en/java/
 
 ## Topics covered so far
-* dependency injection
-* java classes/objects
+* Dependency Injection
+* Java classes/objects
 * OOP
     * inheritance
     * polymorphism
- * functional programming
+* functional programming
     * streams
     * lambda
     * functional interfaces
+* Java Concurrency 
 
 ### Steps to run applications
 ```
