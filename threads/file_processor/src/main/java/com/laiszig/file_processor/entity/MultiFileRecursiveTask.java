@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 public class MultiFileRecursiveTask extends RecursiveTask<Map<String, Integer>> {
 
     private List<String[]> arrays;
-    private static final int ARRAY_THRESHOLD = 4;  // Split list if more than 2 arrays
-    private static final int CHUNK_THRESHOLD = 1; // Split arrays into chunks of 1000 entries
+    private static final int ARRAY_THRESHOLD = 1;  // Split list if more than 2 arrays
+    private static final int CHUNK_THRESHOLD = 1000; // Split arrays into chunks of 1000 entries
 
     public MultiFileRecursiveTask(List<String[]> arrays) {
         this.arrays = arrays;

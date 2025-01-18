@@ -7,6 +7,7 @@ import com.laiszig.file_processor.reader.FileReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
@@ -38,6 +39,7 @@ public class ReaderRecursiveTask extends RecursiveTask<Map<String, Integer>> {
             return processing(wordsFromTxt);
         }
     }
+
 
     private Collection<ReaderRecursiveTask> createSubtasks() {
         List<ReaderRecursiveTask> dividedTasks = new ArrayList<>();
