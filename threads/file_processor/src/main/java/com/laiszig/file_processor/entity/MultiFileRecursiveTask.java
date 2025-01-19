@@ -63,6 +63,7 @@ public class MultiFileRecursiveTask extends RecursiveTask<Map<String, Integer>> 
         if (array.length > CHUNK_THRESHOLD) {
             // Split the array into smaller chunks
             List<ReaderRecursiveTask> chunkTasks = createChunkSubtasks(array);
+
             return ForkJoinTask.invokeAll(chunkTasks)
                     .stream()
                     .map(ForkJoinTask::join)

@@ -30,7 +30,7 @@ public class Test extends RecursiveTask<Map<String, Integer>> {
         }
     }
 
-    private ConcurrentHashMap<String, Integer> processMap() {
+    public ConcurrentHashMap<String, Integer> processMap() {
         ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
         for (int i = start; i < end; i++) {
             String word = words[i];
@@ -51,7 +51,7 @@ public class Test extends RecursiveTask<Map<String, Integer>> {
         rightTask.fork();
 
         Map<String, Integer> leftResult = leftTask.join();
-        Map<String, Integer>  rightResult = rightTask.join();
+        Map<String, Integer>  rightResult = rightTask.compute();
 
         leftResult.forEach((key, value) -> map.merge(key, value, Integer::sum));
         rightResult.forEach((key, value) -> map.merge(key, value, Integer::sum));
