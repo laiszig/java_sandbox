@@ -1,10 +1,7 @@
 package com.laiszig.file_processor.entity;
 
-
-import com.laiszig.file_processor.intArrayTask.MultiArrayRecursiveTask;
 import com.laiszig.file_processor.reader.FileReader;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,7 +14,7 @@ public class ReaderRecursiveTask extends RecursiveTask<Map<String, Integer>> {
 
     private String[] wordsFromTxt;
 
-    private static final int THRESHOLD = 12;
+    private static final int THRESHOLD = 100;
 
     public ReaderRecursiveTask(String[] wordsFromTxt) {
         this.wordsFromTxt = wordsFromTxt;
@@ -25,19 +22,20 @@ public class ReaderRecursiveTask extends RecursiveTask<Map<String, Integer>> {
 
     @Override
     protected Map<String, Integer> compute() {
+        ConcurrentHashMap<String, Integer> wordMap = new ConcurrentHashMap<>(Map.of());
         if (wordsFromTxt.length > THRESHOLD) {
-            return ForkJoinTask.invokeAll(createSubtasks())
+            ForkJoinTask.invokeAll(createSubtasks())
                     .stream()
                     .map(ForkJoinTask::join)
-                    .flatMap(map -> map.entrySet().stream())
-                    .collect(Collectors.toMap(
-                            Map.Entry::getKey,
-                            Map.Entry::getValue,
-                            Integer::sum
-                    ));
+                    .forEach(subtaskResult ->
+                            subtaskResult.forEach((key, value) ->
+                                    wordMap.merge(key, value, Integer::sum)
+                            )
+                    );
         } else {
-            return processing(wordsFromTxt);
+            wordMap.putAll(processing(wordsFromTxt));
         }
+        return wordMap;
     }
 
 
@@ -67,13 +65,14 @@ class Main {
     public static void main(String[] args) throws IOException {
         ForkJoinPool pool = new ForkJoinPool();
         FileReader fileReader = new FileReader();
-        String text = fileReader.readFile("random_words_1.txt");
+        String input = fileReader.readFile("random_words_1.txt");
+        String text = input.replaceAll("[, .]", " ");
         String[] textArr = text.split(" ");
         ReaderRecursiveTask task = new ReaderRecursiveTask(textArr);
         Map<String, Integer> result = pool.invoke(task);
 
         for(Map.Entry<String, Integer> entry : result.entrySet()) {
-            System.out.println(entry.getKey() + " number of occurrences: " + entry.getValue() + " ------------------> Printed by: " + Thread.currentThread().getName());
+            System.out.println(entry.getKey() + " number of occurrences: " + entry.getValue());
         }
     }
 }

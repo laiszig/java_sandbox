@@ -3,12 +3,10 @@ package com.laiszig.file_processor.entity;
 import com.laiszig.file_processor.reader.FileReader;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Test extends RecursiveTask<Map<String, Integer>> {
 
@@ -26,34 +24,38 @@ public class Test extends RecursiveTask<Map<String, Integer>> {
     @Override
     protected Map<String, Integer> compute() {
         if (end - start <= THRESHOLD) {
-            Map<String, Integer> map = new HashMap<>(Map.of());
-            for (String word : words) {
-                if (word.isBlank()) {
-                    continue;
-                }
-                if (map.containsKey(word)) {
-                    map.put(word, map.get(word) + 1);
-                } else {
-                    map.put(word, 1);
-                }
-            }
-            return map;
+            return processMap();
         } else {
-            int mid = (start + end) / 2;
-
-            Test leftTask = new Test(words, start, mid);
-            Test rightTask = new Test(words, mid, end);
-
-            leftTask.fork();
-            rightTask.fork();
-
-            Map<String, Integer> leftResult = leftTask.join();
-            Map<String, Integer>  rightResult = rightTask.join();
-
-            return Stream.concat(
-                    leftResult.entrySet().stream(), rightResult.entrySet().stream())
-                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum));
+            return createSubTasks();
         }
+    }
+
+    private ConcurrentHashMap<String, Integer> processMap() {
+        ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+        for (int i = start; i < end; i++) {
+            String word = words[i];
+            if (word.isBlank()) continue;
+            map.merge(word, 1, Integer::sum);
+        }
+        return map;
+    }
+
+    private ConcurrentHashMap<String, Integer> createSubTasks() {
+        ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+        int mid = (start + end) / 2;
+
+        Test leftTask = new Test(words, start, mid);
+        Test rightTask = new Test(words, mid, end);
+
+        leftTask.fork();
+        rightTask.fork();
+
+        Map<String, Integer> leftResult = leftTask.join();
+        Map<String, Integer>  rightResult = rightTask.join();
+
+        leftResult.forEach((key, value) -> map.merge(key, value, Integer::sum));
+        rightResult.forEach((key, value) -> map.merge(key, value, Integer::sum));
+        return map;
     }
 }
 
@@ -62,7 +64,7 @@ class MainMethod {
         ForkJoinPool pool = new ForkJoinPool();
         FileReader fileReader = new FileReader();
         String input = fileReader.readFile("random_words_1.txt");
-        String text = input.replaceAll("[, .]", " ");
+        String text = input.replaceAll("[\\n\\r\\t,.]", " ").replaceAll("\\s+", " ").trim();
 
         String[] textArr = text.split(" ");
         Test task = new Test(textArr, 0, textArr.length);
