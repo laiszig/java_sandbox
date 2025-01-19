@@ -1,21 +1,17 @@
-package com.laiszig.file_processor.entity;
+package com.laiszig.file_processor.recursive;
 
-import com.laiszig.file_processor.reader.FileReader;
-
-import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
-public class Test extends RecursiveTask<Map<String, Integer>> {
+public class ReaderRecursive extends RecursiveTask<Map<String, Integer>> {
 
     private static final int THRESHOLD = 100;
     private final String[] words;
     private final int start;
     private final int end;
 
-    public Test(String[] words, int start, int end) {
+    public ReaderRecursive(String[] words, int start, int end) {
         this.words = words;
         this.start = start;
         this.end = end;
@@ -44,8 +40,8 @@ public class Test extends RecursiveTask<Map<String, Integer>> {
         ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
         int mid = (start + end) / 2;
 
-        Test leftTask = new Test(words, start, mid);
-        Test rightTask = new Test(words, mid, end);
+        ReaderRecursive leftTask = new ReaderRecursive(words, start, mid);
+        ReaderRecursive rightTask = new ReaderRecursive(words, mid, end);
 
         leftTask.fork();
         rightTask.fork();
@@ -56,22 +52,5 @@ public class Test extends RecursiveTask<Map<String, Integer>> {
         leftResult.forEach((key, value) -> map.merge(key, value, Integer::sum));
         rightResult.forEach((key, value) -> map.merge(key, value, Integer::sum));
         return map;
-    }
-}
-
-class MainMethod {
-    public static void main(String[] args) throws IOException {
-        ForkJoinPool pool = new ForkJoinPool();
-        FileReader fileReader = new FileReader();
-        String input = fileReader.readFile("random_words_1.txt");
-        String text = input.replaceAll("[\\n\\r\\t,.]", " ").replaceAll("\\s+", " ").trim();
-
-        String[] textArr = text.split(" ");
-        Test task = new Test(textArr, 0, textArr.length);
-        Map<String, Integer> result = pool.invoke(task);
-
-        for(Map.Entry<String, Integer> entry : result.entrySet()) {
-            System.out.println(entry.getKey() + " number of occurrences: " + entry.getValue() + " ------------------> Printed by: " + Thread.currentThread().getName());
-        }
     }
 }

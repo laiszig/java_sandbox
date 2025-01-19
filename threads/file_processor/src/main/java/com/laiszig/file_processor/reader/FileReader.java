@@ -7,11 +7,6 @@ import java.util.*;
 
 public class FileReader {
 
-    public Map<String, Integer> processFiles (String resource) throws IOException {
-        String fileString = readFile(resource);
-        return countWordOccurrence(fileString);
-    }
-
     public String readFile(String path) throws IOException {
         ClassLoader classLoader = FileProcessorApplication.class.getClassLoader();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -29,30 +24,6 @@ public class FileReader {
             } finally {
                 br.close();
             }
-        }
-    }
-
-    public Map<String, Integer> countWordOccurrence(String string) {
-        String[] a = string.split(" ");
-        HashMap<String, Integer> map = new HashMap<>();
-
-        for (String word : a) {
-            if(word.isBlank()) {
-                continue;
-            }
-            if(map.containsKey(word)) {
-                map.put(word, map.get(word)+1);
-            }
-            else {
-                map.put(word, 1);
-            }
-        }
-        return map;
-    }
-
-    public void printOccurrences(Map<String, Integer> map) {
-        for(Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + " number of occurrences: " + entry.getValue() + " ------------------> Printed by: " + Thread.currentThread().getName());
         }
     }
 
