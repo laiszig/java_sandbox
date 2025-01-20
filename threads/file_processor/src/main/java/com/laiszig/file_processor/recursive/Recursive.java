@@ -1,23 +1,14 @@
-package com.laiszig.file_processor.test;
+package com.laiszig.file_processor.recursive;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.RecursiveTask;
 
-public abstract class Rec extends RecursiveTask<Map<String, Integer>> {
+public abstract class Recursive extends RecursiveTask<Map<String, Integer>> {
 
     abstract ConcurrentHashMap<String, Integer> splitTasks();
 
-    protected ConcurrentHashMap<String, Integer> processWords(String[] words) {
-        ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
-        for (String word : words) {
-            if (word.isBlank()) continue;
-            map.merge(word, 1, Integer::sum);
-        }
-        return map;
-    }
-
-    protected static ConcurrentHashMap<String, Integer> forkJoinTasks(Rec leftTask, Rec rightTask) {
+    protected ConcurrentHashMap<String, Integer> forkJoinTasks(Recursive leftTask, Recursive rightTask) {
         ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
         leftTask.fork();
         rightTask.fork();
@@ -30,6 +21,5 @@ public abstract class Rec extends RecursiveTask<Map<String, Integer>> {
 
         return map;
     }
-
 
 }

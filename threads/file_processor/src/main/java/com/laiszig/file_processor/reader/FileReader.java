@@ -7,6 +7,25 @@ import java.util.*;
 
 public class FileReader {
 
+    private final String path;
+
+    public FileReader(String path) {
+        this.path = path;
+    }
+
+    public List<String[]> processFiles() throws IOException {
+        List<String> resources = getResourceFiles(path);
+        List<String[]> fileArrays = new ArrayList<>();
+
+        for (String resource : resources) {
+            String input = readFile(resource);
+            String text = input.replaceAll("[\\n\\r\\t,.]", " ").replaceAll("\\s+", " ").trim();
+            String[] textArr = text.split(" ");
+            fileArrays.add(textArr);
+        }
+        return fileArrays;
+    }
+
     public String readFile(String path) throws IOException {
         ClassLoader classLoader = FileProcessorApplication.class.getClassLoader();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
