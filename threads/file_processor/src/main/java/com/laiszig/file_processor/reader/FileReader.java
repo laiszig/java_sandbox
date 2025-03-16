@@ -6,29 +6,30 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class FileReader {
 
-    private final String path;
+    private final Path path;
 
-    public FileReader(String path) {
-        this.path = path;
+    public FileReader(Path path) {
+        this.path = path.toAbsolutePath();
     }
 
     public List<String[]> processFiles() throws IOException {
         List<String> resources = getResourceFiles(path);
-        List<String[]> fileArrays = new ArrayList<>();
+        List<String[]> processedFileLines = new ArrayList<>();
 
         for (String resource : resources) {
             String input = readFile(resource);
             String text = input.replaceAll("[\\n\\r\\t,.]", " ").replaceAll("\\s+", " ").trim();
             String[] textArr = text.split(" ");
-            fileArrays.add(textArr);
+            processedFileLines.add(textArr);
         }
-        return fileArrays;
+        return processedFileLines;
     }
 
     public String readFile(String path) throws IOException {
@@ -51,11 +52,11 @@ public class FileReader {
         }
     }
 
-    public List<String> getResourceFiles(String path) throws IOException {
+    public List<String> getResourceFiles(Path directoryPath) throws IOException {
         List<String> filenames = new ArrayList<>();
 
         try (
-                InputStream in = getResourceAsStream(path);
+                InputStream in = getResourceAsStream(directoryPath.toString());
                 BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
             String resource;
 

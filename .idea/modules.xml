@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/data-structures.iml" filepath="$PROJECT_DIR$/data-structures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data-structures.main.iml" filepath="$PROJECT_DIR$/.idea/modules/data-structures.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data-structures.test.iml" filepath="$PROJECT_DIR$/.idea/modules/data-structures.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/java_sandbox.iml" filepath="$PROJECT_DIR$/.idea/java_sandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka-wordcount.iml" filepath="$PROJECT_DIR$/kafka-wordcount.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka-wordcount.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka-wordcount.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka-wordcount.test.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka-wordcount.test.iml" />
     </modules>
   </component>
 </project>
