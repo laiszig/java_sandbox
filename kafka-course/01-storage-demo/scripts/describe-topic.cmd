@@ -1,0 +1,1 @@
+C:\kafka_2.13-3.9.0\kafka\bin\windows\kafka-topics.bat --describe  --zookeeper localhost:2181 --topic invoice

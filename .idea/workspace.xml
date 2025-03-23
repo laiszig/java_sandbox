@@ -56,6 +56,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Gradle.data-structures [:graphs.CompleteGraph.main()].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.data-structures [:graphs.DirectedGraph.main()].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
@@ -128,7 +129,7 @@
       <workItem from="1739470139715" duration="1222000" />
       <workItem from="1741460980902" duration="1146000" />
       <workItem from="1742133454432" duration="579000" />
-      <workItem from="1742140061417" duration="405000" />
+      <workItem from="1742140061417" duration="1564000" />
     </task>
     <servers />
   </component>
