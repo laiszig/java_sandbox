@@ -31,6 +31,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testAnnotationProcessor("org.projectlombok:lombok")
     implementation("org.mapstruct:mapstruct:1.7.0.Beta1")
+    implementation("org.springframework.boot:spring-boot-starter-validation:4.1.0-RC1")
 }
 
 tasks.withType<Test> {

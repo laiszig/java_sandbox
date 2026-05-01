@@ -9,20 +9,20 @@ import java.util.List;
 public class Change {
 
     private final List<BillUnit> changeDue;
-    private final PaymentRequest input;
+    private final Payment input;
 
-    public static final int[] BILLS = {100, 50, 20, 10, 5, 2, 1};
+    public static final int[] BILLS = {100, 50, 20, 10, 5, 2};
 
-    private Change(PaymentRequest input) {
+    private Change(Payment input) {
         this.changeDue = calculateChange(input);
         this.input = input;
     }
 
-    public static Change of(PaymentRequest input) {
+    public static Change of(Payment input) {
         return (input == null ? null : new Change(input));
     }
 
-    private List<BillUnit> calculateChange(PaymentRequest input) {
+    private List<BillUnit> calculateChange(Payment input) {
         int change = input.getPaid() - input.getToPay();
         List<BillUnit> output = new ArrayList<>();
 
