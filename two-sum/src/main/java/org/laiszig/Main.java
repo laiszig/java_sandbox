@@ -1,5 +1,7 @@
 package org.laiszig;
 
+import java.util.Arrays;
+
 /*
 Two sum
 Exemplo Prático
@@ -10,25 +12,27 @@ Explicação: Como nums[0] + nums[1] é igual a 2 + 7 = 9, retornamos os número
 public class Main {
     static void main() {
         int[] nums = {2, 11, 12, 7};
-        int target = 9;
-        boolean targetFound = false;
+        int target = 22;
+        findTwoSum(nums, target);
+    }
 
+    public static int[] findTwoSum(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
+            int[] result = new int[2];
             int sum;
-            for (int j = i+1; j < nums.length; j++) {
+            for (int j = i + 1; j < nums.length; j++) {
                 sum = nums[i] + nums[j];
                 System.out.println(sum);
-
                 if (sum == target) {
-                    System.out.println(nums[i] + " " + nums[j]);
-                    targetFound = true;
-                    break;
+                    result[0] = nums[i];
+                    result[1] = nums[j];
+                    System.out.println(Arrays.toString(result));
+                    return result;
                 }
             }
-            if (targetFound) {
-                break;
-            }
         }
+        System.out.println("Two sum target not found.");
+        return null;
     }
 
 }
