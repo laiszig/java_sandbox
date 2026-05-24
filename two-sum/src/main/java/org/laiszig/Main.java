@@ -9,20 +9,26 @@ Explicação: Como nums[0] + nums[1] é igual a 2 + 7 = 9, retornamos os número
  */
 public class Main {
     static void main() {
-//        int[] nums = {11, 2, 12, 7};
-        int[] nums = {3, 5, 7, 1, 32, 11, 97, 100};
+        int[] nums = {2, 11, 12, 7};
         int target = 9;
-        int sum = 0;
-        int last = nums.length-1;
+        boolean targetFound = false;
 
-        for (int num : nums) {
-            sum = nums[last] + num;
-            if (sum == target) {
+        for (int i = 0; i < nums.length; i++) {
+            int sum;
+            for (int j = i+1; j < nums.length; j++) {
+                sum = nums[i] + nums[j];
+                System.out.println(sum);
+
+                if (sum == target) {
+                    System.out.println(nums[i] + " " + nums[j]);
+                    targetFound = true;
+                    break;
+                }
+            }
+            if (targetFound) {
                 break;
             }
-            sum = 0;
         }
-        System.out.println("Sum: " + sum);
-
     }
+
 }
