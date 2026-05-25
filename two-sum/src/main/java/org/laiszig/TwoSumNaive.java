@@ -9,10 +9,12 @@ Entrada: nums = [2, 7, 11, 15] e target = 9
 Saída esperada: [2, 7]
 Explicação: Como nums[0] + nums[1] é igual a 2 + 7 = 9, retornamos os números 2 e 7.
  */
-public class Main {
+// O(n^2)
+public class TwoSumNaive {
     static void main() {
-        int[] nums = {2, 11, 12, 7};
-        int target = 22;
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+
         findTwoSum(nums, target);
     }
 

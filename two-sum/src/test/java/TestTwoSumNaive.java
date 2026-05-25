@@ -1,8 +1,10 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.laiszig.Main;
 
-public class TestMain {
+import org.laiszig.TwoSumBinarySearch;
+import org.laiszig.TwoSumNaive;
+
+public class TestTwoSumNaive {
 
     @Test
     void shouldReturn_True() {
@@ -11,7 +13,7 @@ public class TestMain {
         int target = 9;
         int[] twoSum = {2, 7};
 
-        int[] result = Main.findTwoSum(nums, target);
+        int[] result = TwoSumNaive.findTwoSum(nums, target);
         assertArrayEquals(result, twoSum);
 
     }
@@ -23,7 +25,7 @@ public class TestMain {
         int target = 6;
         int[] twoSum = {2, 4};
 
-        int[] result = Main.findTwoSum(nums, target);
+        int[] result = TwoSumNaive.findTwoSum(nums, target);
         assertArrayEquals(result, twoSum);
 
     }
@@ -34,7 +36,7 @@ public class TestMain {
         int target = 6;
         int[] twoSum = {3, 3};
 
-        int[] result = Main.findTwoSum(nums, target);
+        int[] result = TwoSumNaive.findTwoSum(nums, target);
         assertArrayEquals(result, twoSum);
     }
 
@@ -44,7 +46,7 @@ public class TestMain {
         int target = -8;
         int[] twoSum = {-3, -5};
 
-        int[] result = Main.findTwoSum(nums, target);
+        int[] result = TwoSumNaive.findTwoSum(nums, target);
         assertArrayEquals(result, twoSum);
     }
 
@@ -54,15 +56,7 @@ public class TestMain {
         int target = -2;
         int[] twoSum = {1, -3};
 
-        int[] result = Main.findTwoSum(nums, target);
+        int[] result = TwoSumNaive.findTwoSum(nums, target);
         assertArrayEquals(result, twoSum);
     }
-
-
-
-
-
-
-
-
 }
