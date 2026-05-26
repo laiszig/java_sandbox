@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class Main {
     static void main() {
 
-        int[] arr = {10, 6, 8, 5, 11, 9};
-        // Output: [3,1,2,1,1,0]
+        int[] arr = {11,19,12,15,14,18,7,1,8,9};
+        // Output: [1,3,1,2,1,3,2,1,1,0]
         int[] result = canSeePersonCount(arr);
         System.out.println(Arrays.toString(result));
     }
@@ -24,7 +24,9 @@ public class Main {
                 if (arr[j] > arr[i]) {
                     break;
                 }
-                lastSeen = arr[j];
+                if (lastSeen < arr[j]) {
+                    lastSeen = arr[j];
+                }
             }
         }
         return seeCount;
