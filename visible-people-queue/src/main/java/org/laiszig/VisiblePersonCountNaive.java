@@ -2,7 +2,7 @@ package org.laiszig;
 
 import java.util.Arrays;
 
-public class Main {
+public class VisiblePersonCountNaive {
     static void main() {
 
         int[] arr = {11,19,12,15,14,18,7,1,8,9};
@@ -19,7 +19,6 @@ public class Main {
             for (int j = i + 1; j < arr.length; j++) {
                 if (lastSeen < arr[j]) {
                     seeCount[i] = seeCount[i] + 1;
-                    System.out.println(arr[j]);
                 }
                 if (arr[j] > arr[i]) {
                     break;
